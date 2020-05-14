@@ -1,0 +1,278 @@
+<mvc:View controllerName="ECNNODE.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" displayBlock="true" busy="{/appProperties/busy}">
+	<App id="idAppControl" height="90%">
+		<Page id="page" showHeader="false">
+			<content>
+				<f:Form editable="true">
+					<f:toolbar>
+						<Toolbar id="TB1">
+							<Title id="Title1" text="ECN審批" level="H4" titleStyle="H4"/>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://print" text="列印" press="handlePrint" type="Accept"/>
+						</Toolbar>
+					</f:toolbar>
+					<f:layout>
+						<f:ResponsiveGridLayout labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="2"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement>
+									<f:fields>
+										<l:HorizontalLayout>
+											<Text text="ECR编号:" width="6em" textAlign="Begin"/>
+											<Text id="ECRNO" text="{data>/context/ECRNO}" width="30em"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="填單日期:" width="6em" textAlign="Begin"/>
+											<Text id="FORMDATE" text="{path:'data>/context/FORMDATE',formatter:'.formatter.date'}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="所屬部門:" width="6em" textAlign="Begin"/>
+											<Text id="DEPARTMENT" text="{data>/context/DEPARTMENT}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="填表人:" width="6em" textAlign="Begin"/>
+											<Text id="WRITER" text="{data>/context/WRITER}"/>
+										</l:HorizontalLayout>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement>
+									<f:fields>
+										<l:HorizontalLayout>
+											<Text text="ECN编号:" width="6em" textAlign="Begin"/>
+											<Text id="ECNNO" text="{data>/context/ECNNO}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="申請人:" width="6em" textAlign="Begin"/>
+											<Text id="REQUESTER" text="{data>/context/REQUESTER}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="Part/Model:" width="6em" textAlign="Begin"/>
+											<Text id="MODELNO" text="{data>/context/MODELNO}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="M.B:" width="6em" textAlign="Begin"/>
+											<Text id="MB" text="{data>/context/MB}"/>
+										</l:HorizontalLayout>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement>
+									<f:fields>
+										<l:HorizontalLayout>
+											<Text text="ECN申請人:" width="6em" textAlign="Begin"/>
+											<Text id="ECNACCOUNT" text="{data>/context/ACCOUNT}"/>
+										</l:HorizontalLayout>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<l:VerticalLayout class="sapUiContentPadding" width="100%" enabled="false">
+					<Text text="變更原因" class="sapUiTinyMarginTop"/>
+					<TextArea id="CHANGEREASON" value="{data>/context/CHANGEREASON}" maxLength="200" width="100%" rows="4"/>
+					<Text text="建議方式" class="sapUiTinyMarginTop"/>
+					<TextArea id="ADVISE" maxLength="200" width="100%" value="{data>/context/ADVISE}" rows="4"/>
+					<Text text="未變更之後影響" class="sapUiTinyMarginTop"/>
+					<TextArea id="NOCHANGEIMPACT" value="{data>/context/NOCHANGEIMPACT}" maxLength="200" width="100%" rows="4"/>
+					<!--<Text text="協辦工程師" class="sapUiTinyMarginTop"/>-->
+					<!--<TextArea value="{data>/context/SECONDENGINEER}" maxLength="40" width="100%"/>-->
+				</l:VerticalLayout>
+				<f:Form editable="true" title="物料移动情形">
+					<f:layout>
+						<f:ResponsiveGridLayout labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="2"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement>
+									<f:fields>
+										<l:HorizontalLayout>
+											<Text text="組件料號:" width="6em" textAlign="Begin"/>
+											<Text id="COMPONENT" text="{data>/context/COMPONENT}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="零件位置:" width="6em" textAlign="Begin"/>
+											<Text id="PARTLOCATION" text="{data>/context/PARTLOCATION}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="ECN前料號:" width="6em" textAlign="Begin"/>
+											<Text id="ECNMATERIAL1" text="{data>/context/ECNMATERIAL1}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="ECN後料號:" width="6em" textAlign="Begin"/>
+											<Text id="ECNMATERIAL2" text="{data>/context/ECNMATERIAL2}"/>
+										</l:HorizontalLayout>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement>
+									<f:fields>
+										<l:HorizontalLayout>
+											<Text text="數量:" width="6em" textAlign="Begin"/>
+											<Text id="QUANTITY1" text="{data>/context/QUANTITY1}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="處理方式:" width="6em" textAlign="Begin"/>
+											<Text id="PROCESSINGWAY1" text="{data>/context/PROCESSINGWAY1}"/>
+										</l:HorizontalLayout>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<f:Form editable="true" title="现存品处理">
+					<f:layout>
+						<f:ResponsiveGridLayout labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="2"/>
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement>
+									<f:fields>
+										<l:HorizontalLayout>
+											<Text text="料號:" width="6em" textAlign="Begin"/>
+											<Text id="MATERIAL" text="{data>/context/MATERIAL}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="倉別:" width="6em" textAlign="Begin"/>
+											<Text id="WAREHOUSE" text="{data>/context/WAREHOUSE}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="數量:" width="6em" textAlign="Begin"/>
+											<Text id="QUANTITY2" text="{data>/context/QUANTITY2}"/>
+										</l:HorizontalLayout>
+										<l:HorizontalLayout>
+											<Text text="處理方式:" width="6em" textAlign="Begin"/>
+											<Text id="PROCESSINGWAY2" text="{data>/context/PROCESSINGWAY2}"/>
+										</l:HorizontalLayout>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement>
+									<f:fields>
+										<l:HorizontalLayout >
+											<Text text="其他說明" width="6em" textAlign="Begin"/>
+											<Text id="OINSTRUCTIONS" text="{data>/context/OINSTRUCTIONS}"/>
+										</l:HorizontalLayout>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				<Table id="ECRITEM" inset="false" items="{ path: 'data>/context/ECNLIST'}" class="sapFDynamicPageAlignContent" width="auto" mode="None"
+					busyIndicatorDelay="10" growing="true" growingScrollToLoad="true">
+					<headerToolbar>
+						<OverflowToolbar>
+							<Title text="ECN清單" level="H2"/>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column hAlign="Begin">
+							<Text text="組件料號"/>
+						</Column>
+						<Column hAlign="Begin">
+							<Text text="零件位置"/>
+						</Column>
+						<Column hAlign="Begin" width="8em">
+							<Text text="ECN前料號"/>
+						</Column>
+						<Column hAlign="Begin" width="8em">
+							<Text text="ECN后料號 "/>
+						</Column>
+						<Column hAlign="Begin">
+							<Text text="數量1"/>
+						</Column>
+						<Column hAlign="Begin">
+							<Text text="處理方式1" width="8em"/>
+						</Column>
+						<Column hAlign="Begin">
+							<Text text="料號"/>
+						</Column>
+						<Column hAlign="Begin" minScreenWidth="3840px" demandPopin="true" popinDisplay="Inline">
+							<Text text="倉別"/>
+						</Column>
+						<Column hAlign="Begin" minScreenWidth="3840px" demandPopin="true" popinDisplay="Inline">
+							<Text text="數量2"/>
+						</Column>
+						<Column hAlign="Begin" minScreenWidth="3840px" demandPopin="true" popinDisplay="Inline">
+							<Text text="處理方式2"/>
+						</Column>
+						<Column hAlign="Begin" minScreenWidth="3840px" demandPopin="true" popinDisplay="Inline">
+							<Text text="其他說明"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<!--<Text text="{data>ECNITEMNUM}"/>-->
+								<Text text="{data>COMPONENT}"/>
+								<Text text="{data>PARTLOCATION}"/>
+								<Text text="{data>ECNMATERIAL1}"/>
+								<Text text="{data>ECNMATERIAL2}"/>
+								<Text text="{data>QUANTITY1}"/>
+								<Text text="{data>PROCESSINGWAY1}"/>
+								<Text text="{data>MATERIAL}"/>
+								<Text text="{data>WAREHOUSE}"/>
+								<Text text="{data>QUANTITY2}"/>
+								<Text text="{data>PROCESSINGWAY2}"/>
+								<Text text="{data>OINSTRUCTIONS}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<!--<f:Form editable="true">-->
+				<!--	<f:layout>-->
+				<!--		<f:ResponsiveGridLayout labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="2"/>-->
+				<!--	</f:layout>-->
+				<!--	<f:formContainers>-->
+				<!--		<f:FormContainer>-->
+				<!--			<f:formElements>-->
+				<!--				<f:FormElement>-->
+				<!--					<f:fields>-->
+				<!--						<l:HorizontalLayout>-->
+				<!--							<Text text="簽核人員:" width="6em" textAlign="Begin"/>-->
+				<!--							<Text id="APPROVER" text="{data>/context/APPROVER}" width="20em"/>-->
+				<!--						</l:HorizontalLayout>-->
+				<!--						<l:HorizontalLayout>-->
+				<!--							<Text text="職稱:" width="6em" textAlign="Begin"/>-->
+				<!--							<Text id="JOB" text="{data>/context/JOB}"/>-->
+				<!--						</l:HorizontalLayout>-->
+				<!--						<l:HorizontalLayout>-->
+				<!--							<Text text="簽核時間:" width="6em" textAlign="Begin"/>-->
+				<!--							<Text id="APPROVALDATE" text="{path:'data>/context/APPROVALDATE'}"/>-->
+				<!--						</l:HorizontalLayout>-->
+				<!--					</f:fields>-->
+				<!--				</f:FormElement>-->
+				<!--								<f:FormElement>-->
+				<!--					<f:fields>-->
+				<!--						<l:HorizontalLayout>-->
+				<!--							<Text text="簽核意見:" width="6em" textAlign="Begin"/>-->
+				<!--							<Input id="RESULT" value="{data>/context/RESULT}" width="30em"/>-->
+				<!--						</l:HorizontalLayout>-->
+				<!--					</f:fields>-->
+				<!--				</f:FormElement>-->
+				<!--			</f:formElements>-->
+				<!--		</f:FormContainer>-->
+				<!--	</f:formContainers>-->
+				<!--</f:Form>-->
+				<l:VerticalLayout class="sapUiContentPadding" width="100%" enabled="true">
+					<Text text="簽核意見" class="sapUiTinyMarginTop"/>
+					<TextArea id="RESULT" value="{data>/context/RESULT}" maxLength="200" width="100%" showExceededText="true"/>
+				</l:VerticalLayout>
+				<UploadCollection id="UploadCollectionAttach" multiple="true" change="onChange" fileDeleted="onFileDeleted" fileType="{fileTypes>/selected}"
+					selectionChange="onSelectionChange" typeMissmatch="onTypeMissmatch" uploadComplete="onUploadComplete"
+					beforeUploadStarts="onBeforeUploadStarts" uploadTerminated="onUploadTerminated" items="{Attach>DocumentInfoRecordToAttachmentNavigation}"
+					showSeparators="{settings>/showSeparators}" uploadEnabled="false" mode="{settings>/mode}" uploadButtonInvisible="true"
+					numberOfAttachmentsText="附件">
+					<items>
+						<UploadCollectionItem documentId="{Attach>ArchiveDocumentID}" fileName="{Attach>FileName}" mimeType="{Attach>MimeType}"
+							url="{path:'Attach>__metadata/media_src',formatter:'.getMediaUrl'}" enableEdit="{settings>/enableEdit}" enableDelete="false"
+							visibleDelete="{settings>/visibleDelete}" visibleEdit="{settings>/visibleEdit}" deletePress="ondeletePress"></UploadCollectionItem>
+					</items>
+				</UploadCollection>
+			</content>
+		</Page>
+	</App>
+</mvc:View>

@@ -1,0 +1,202 @@
+<mvc:View controllerName="ECRNODE.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" displayBlock="true" busy="{/appProperties/busy}"
+	xmlns:ux="sap.uxap">
+	<App id="idAppControl" height="90%">
+		<pages>
+			<Page id="page" showHeader="false">
+				<content>
+					<f:Form editable="true">
+						<f:toolbar>
+							<Toolbar id="TB1">
+								<Title id="Title1" text="ECR審批" level="H4" titleStyle="H4"/>
+								<ToolbarSpacer/>
+								<Button icon="sap-icon://print" text="列印" press="handlePrint" type="Accept"/>
+							</Toolbar>
+						</f:toolbar>
+						<f:layout>
+							<f:ResponsiveGridLayout labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="2"/>
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement>
+										<f:fields>
+											<l:HorizontalLayout>
+												<Text text="ECR编号:" width="6em" textAlign="Begin"/>
+												<Text id="ECRNO" text="{data>/context/ECRNO}"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="ECR主旨:" width="6em" textAlign="Begin"/>
+												<Text id="ECRSUBJECT" text="{data>/context/ECRSUBJECT}" width="20em"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="發起單位:" width="6em" textAlign="Begin"/>
+												<Text id="ORGANIZATION" text="{data>/context/ORGANIZATION}"/>
+											</l:HorizontalLayout>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<l:HorizontalLayout>
+												<Text text="填單日期:" width="6em" textAlign="Begin"/>
+												<Text id="FORMDATE" text="{path:'data>/context/FORMDATE',formatter:'.formatter.date'}"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="填表人:" width="6em" textAlign="Begin"/>
+												<Text id="WRITER" text="{data>/context/WRITER}"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="申請人:" width="6em" textAlign="Begin"/>
+												<Text id="REQUESTER" text="{data>/context/REQUESTER}"/>
+											</l:HorizontalLayout>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<l:HorizontalLayout>
+												<Text text="所屬部門:" width="6em" textAlign="Begin"/>
+												<Text id="DEPARTMENT" text="{data>/context/DEPARTMENT}"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="Part/Model:" width="6em" textAlign="Begin"/>
+												<Text id="MODELNO" text="{data>/context/MODELNO}"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="主辦工程師:" width="6em" textAlign="Begin"/>
+												<Input id="MAINENGINEER" value="{data>/context/MAINENGINEER}" editable="{/appProperties/edit}" showValueHelp="true"
+													valueHelpRequest="openValuHelpDialog" valueHelpOnly="true"/>
+											</l:HorizontalLayout>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<l:HorizontalLayout>
+												<Text text="協辦工程師:" width="6em" textAlign="Begin"/>
+												<MultiInput id="SECONDENGINEER" showValueHelp="true" valueHelpRequest="openValuHelpDialog1" valueHelpOnly="true"
+													editable="{/appProperties/edit}"/>
+											</l:HorizontalLayout>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+					<l:VerticalLayout class="sapUiContentPadding" width="100%" enabled="false">
+						<Text text="變更原因" class="sapUiTinyMarginTop"/>
+						<TextArea id="CHANGEREASON" value="{data>/context/CHANGEREASON}" showExceededText="false" maxLength="200" width="100%" rows="4"
+							wrapping="Hard"/>
+						<Text text="建議方式" class="sapUiTinyMarginTop"/>
+						<TextArea id="ADVISE" showExceededText="false" maxLength="200" width="100%" value="{data>/context/ADVISE}" rows="4"/>
+						<Text text="未變更之後影響" class="sapUiTinyMarginTop"/>
+						<TextArea id="NOCHANGEIMPACT" value="{data>/context/NOCHANGEIMPACT}" maxLength="200" width="100%" showExceededText="false" rows="4"/>
+						<!--<Text text="協辦工程師" class="sapUiTinyMarginTop"/>-->
+						<!--<TextArea value="{data>/context/SECONDENGINEER}" maxLength="40" width="100%" showExceededText="false"/>-->
+					</l:VerticalLayout>
+					<ScrollContainer height="auto" width="auto" vertical="false">
+						<Table id="ECRITEM" inset="false" items="{ path: 'data>/context/ECRLIST'}">
+							<headerToolbar>
+								<OverflowToolbar>
+									<Title text="ECR明细数据" level="H2"/>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column hAlign="Begin" width="4em">
+									<Text text="編號"/>
+								</Column>
+								<Column hAlign="Begin" width="12rem">
+									<Text text="料號"/>
+								</Column>
+								<Column hAlign="Begin" width="12rem">
+									<Text text="倉別1"/>
+								</Column>
+								<Column hAlign="Begin" width="6rem">
+									<Text text="數量1 "/>
+								</Column>
+								<Column hAlign="Begin" width="12rem">
+									<Text text="使用方式1"/>
+								</Column>
+								<Column hAlign="Begin" width="12rem">
+									<Text text="倉別2"/>
+								</Column>
+								<Column hAlign="Begin" width="6rem">
+									<Text text="數量2"/>
+								</Column>
+								<Column hAlign="Begin" width="12rem">
+									<Text text="使用方式2"/>
+								</Column>
+								<Column hAlign="Begin" minScreenWidth="XXLarge" demandPopin="true" popinDisplay="Inline" width="12rem">
+									<Text text="其他說明"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{data>ECRITEMNUM}"/>
+										<Text text="{data>MATERIAL}"/>
+										<Text text="{data>WAREHOUSE1}"/>
+										<Text text="{data>QUANTITY1}"/>
+										<Text text="{data>INSTRUCTIONS1}"/>
+										<Text text="{data>WAREHOUSE2}"/>
+										<Text text="{data>QUANTITY2}"/>
+										<Text text="{data>INSTRUCTIONS2}"/>
+										<Text text="{data>OINSTRUCTIONS}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+					<!--<f:Form editable="true">-->
+					<!--	<f:layout>-->
+					<!--		<f:ResponsiveGridLayout labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="2"/>-->
+					<!--	</f:layout>-->
+					<!--	<f:formContainers>-->
+					<!--		<f:FormContainer>-->
+					<!--			<f:formElements>-->
+					<!--				<f:FormElement>-->
+					<!--					<f:fields>-->
+					<!--						<l:HorizontalLayout>-->
+					<!--							<Text text="簽核人員:" width="6em" textAlign="Begin"/>-->
+					<!--							<Text id="APPROVER" text="{data>/context/APPROVER}" width="20em"/>-->
+					<!--						</l:HorizontalLayout>-->
+					<!--						<l:HorizontalLayout>-->
+					<!--							<Text text="職稱:" width="6em" textAlign="Begin"/>-->
+					<!--							<Text id="JOB" text="{data>/context/JOB}"/>-->
+					<!--						</l:HorizontalLayout>-->
+					<!--						<l:HorizontalLayout>-->
+					<!--							<Text text="簽核時間:" width="6em" textAlign="Begin"/>-->
+					<!--							<Text id="APPROVALDATE" text="{path:'data>/context/APPROVALDATE'}"/>-->
+					<!--						</l:HorizontalLayout>-->
+					<!--					</f:fields>-->
+					<!--				</f:FormElement>-->
+					<!--			<f:FormElement>-->
+					<!--					<f:fields>-->
+					<!--						<l:HorizontalLayout>-->
+					<!--							<Text text="簽核意見:" width="6em" textAlign="Begin"/>-->
+					<!--							<Input id="SUGGESTION" value="{data>/context/SUGGESTION}" width="30em"/>-->
+					<!--						</l:HorizontalLayout>-->
+					<!--					</f:fields>-->
+					<!--				</f:FormElement>-->
+					<!--			</f:formElements>-->
+					<!--		</f:FormContainer>-->
+					<!--	</f:formContainers>-->
+					<!--</f:Form>-->
+					<l:VerticalLayout class="sapUiContentPadding" width="100%" enabled="true">
+						<Text text="簽核意見" class="sapUiTinyMarginTop"/>
+						<TextArea id="RESULT" value="{data>/context/RESULT}" maxLength="200" width="100%" showExceededText="true"/>
+					</l:VerticalLayout>
+					<UploadCollection id="UploadCollectionAttach" multiple="true" change="onChange" fileDeleted="onFileDeleted" fileType="{fileTypes>/selected}"
+						selectionChange="onSelectionChange" typeMissmatch="onTypeMissmatch" uploadComplete="onUploadComplete"
+						beforeUploadStarts="onBeforeUploadStarts" uploadTerminated="onUploadTerminated" items="{Attach>DocumentInfoRecordToAttachmentNavigation}"
+						showSeparators="{settings>/showSeparators}" uploadEnabled="false" mode="{settings>/mode}" uploadButtonInvisible="true"
+						numberOfAttachmentsText="附件">
+						<items>
+							<UploadCollectionItem documentId="{Attach>ArchiveDocumentID}" fileName="{Attach>FileName}" mimeType="{Attach>MimeType}"
+								url="{path:'Attach>__metadata/media_src',formatter:'.getMediaUrl'}" enableEdit="{settings>/enableEdit}" enableDelete="false"
+								visibleDelete="{settings>/visibleDelete}" visibleEdit="{settings>/visibleEdit}" deletePress="ondeletePress"></UploadCollectionItem>
+						</items>
+					</UploadCollection>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
