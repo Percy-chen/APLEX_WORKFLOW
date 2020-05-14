@@ -69,4 +69,5 @@
 	}],
 	"sendWelcomeFileRedirect": true,
 	"headerWhiteList": ["BusinessObjectTypeName", "LinkedSAPObjectKey"]
+	
 }
